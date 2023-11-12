@@ -4,7 +4,8 @@ import Image from "next/image";
 
 const page = async ({ params: { id } }) => {
 	const anime = await getAnimeResponse(`anime/${id}`);
-	console.log(anime);
+	const genresName = anime.data.genres.map((genre) => genre.name);
+	const genres = genresName.join(" | ");
 
 	return (
 		<>
@@ -35,16 +36,14 @@ const page = async ({ params: { id } }) => {
 				<Image
 					src={anime.data.images.webp.image_url}
 					alt={anime.data.images.jpg.image_url}
-					width={350}
+					width={250}
 					height={250}
 					className="w-full rounded object-cover"
 				/>
 				<div className="pb-8">
 					<h3 className="text-xl font-bold">Sinopsis</h3>
-          <span>Genres: </span>
-					{anime?.data.genres.map((genre) => (
-						<span>{genre.name} - </span>
-					))}
+					<span>Genres : </span>
+					<span>{genres}</span>
 					<p>{anime.data.synopsis}</p>
 				</div>
 			</div>
