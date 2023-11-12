@@ -11,10 +11,11 @@ const InputSearch = () => {
 	const handleSearch = (e) => {
 		const keyword = searchRef.current.value;
 
-		if (!keyword) return;
+		if (!keyword || keyword.trim() == "") return;
 
 		if (e.key == "Enter" || e.type === "click") {
 			router.push(`/search/${keyword}`);
+			searchRef.current.value = "";
 		}
 	};
 
